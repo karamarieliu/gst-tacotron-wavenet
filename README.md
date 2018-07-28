@@ -1,17 +1,22 @@
-# GST Tacotron (exprissive end-to-end speech syntheis using global style token)
+# Global Style Tokens w/ Tacotron and a WaveNet Vocoder 
+
+Main structure of Tacotron w/ WaveNet forked from https://github.com/Rayhane-mamah
+Main structure of GST Tacotron forked from https://github.com/syang1993/gst-tacotron
 
 A tensorflow implementation of the [Style Tokens: Unsupervised Style Modeling, Control and Transfer in End-to-End Speech Synthesis](https://arxiv.org/abs/1803.09017) and [Towards End-to-End Prosody Transfer for Expressive Speech Synthesis with Tacotron](https://arxiv.org/abs/1803.09047).
 
+## Audio Samples
+ In progress. 
+ 
+## Purpose
 
-### Audio Samples
+A recent trend has been in the development Text-to-Speech (TTS) models in ML with the end goal being to emulate voices and produce mimicked speech that produces words not seen during training. Potential applications of TTS systems include offering more personalized healthcare for those who do not have access to a physical doctor, or using realistic voice simlulation to teach online courses. It should be noted that TTS systems have the potential to infringe upon our identity and authenticity. For example, the recent explosion of Deepfakes have the ability to create "fake news" in which a person of power is artificialy simulated.
 
-  * **[Audio Samples](https:///syang1993.github.io/gst-tacotron/)** from models trained using this repo with default hyper-params.
-    * This set was trained using the [Blizzard 2013 dataset](https://www.synsig.org/index.php/Blizzard_Challenge_2013) with and without global style tokens (GSTs).
-      * I found the synthesized audio can learn the prosody of the reference audio.
-      * The audio quality isn't so good as the paper. Maybe more data, more training steps and the wavenet vocoder will improve the quality, as well as better attention mechanism.
-      
+## Model Pros and Limitations
+ In progress.
 
-## Quick Start:
+## Running the model
+Please note: The following instructions are verbatim from @syang1993 in his github repository of GST Tacotron. 
 
 ### Installing dependencies
 
@@ -31,15 +36,13 @@ A tensorflow implementation of the [Style Tokens: Unsupervised Style Modeling, C
    The following are supported out of the box:
     * [LJ Speech](https://keithito.com/LJ-Speech-Dataset/) (Public Domain)
     * [Blizzard 2013](https://www.synsig.org/index.php/Blizzard_Challenge_2013) (Creative Commons Attribution Share-Alike)
+    * [VCTK]
 
-   We use the Blizzard 2013 dataset to test this repo (Google's paper used 147 hours data read by the 2013 Blizzard Challenge speaker). This year Challenge provides about 200 hours unsegmented speech and 9741 segmented waveforms, I did all the experiments based the 9741 segmented waveforms since it's hard for me to split the unsegmented data.
-
-   You can use other datasets if you convert them to the right format. See more details about data pre-process in keithito's [TRAINING_DATA.md](https://github.com/keithito/tacotron/blob/master/TRAINING_DATA.md).
 
 2. **Preprocess the data**
     
    ```
-   python3 preprocess.py --dataset blizzard2013
+   python3 preprocess.py --dataset LJSpeech-1.1
    ```
 
 3. **Train a model**
@@ -55,17 +58,12 @@ A tensorflow implementation of the [Style Tokens: Unsupervised Style Modeling, C
 4. **Synthesize from a checkpoint**
 
    ```
-   python3 eval.py --checkpoint ~/tacotron/logs-tacotron/model.ckpt-185000 --text "hello text" --reference_audio /path/to/ref_audio
+   python3 eval.py --checkpoint ~/gst-tacotron-wavenet/logs-tacotron/model.ckpt-185000 --text "hello text" --reference_audio /path/to/ref_audio
    ```
 
     Replace "185000" with the checkpoint number that you want to use. Then this command line will synthesize a waveform with the content "hello text" and the style of the reference audio. If you don't use the `--reference_audio`, it will generate audio with random style weights, which may generate unintelligible audio sometimes. 
 
    If you set the `--hparams` flag when training, set the same value here.
-
-
-## Notes:
-
-  Since the paper didn't talk about the details of the style-attention layer, I'm a little confused about the global style tokens. For the token embedding (GSTs) size, the paper said that they set the size to 256/h, where `h` is the number of heads. I'm not sure whether I should initialize the same or different GSTs as attention memory for all heads.
 
 ## Reference
   -  Keithito's implementation of tacotron: https://github.com/keithito/tacotron
