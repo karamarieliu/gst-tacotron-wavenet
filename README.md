@@ -1,7 +1,8 @@
 # Global Style Tokens w/ Tacotron and a WaveNet Vocoder 
 
-Main structure of Tacotron w/ WaveNet forked from https://github.com/Rayhane-mamah
-Main structure of GST Tacotron forked from https://github.com/syang1993/gst-tacotron
+Main structure of Tacotron w/ WaveNet forked from https://github.com/Rayhane-mamah.
+
+Main structure of GST Tacotron forked from https://github.com/syang1993/gst-tacotron.
 
 A tensorflow implementation of the [Style Tokens: Unsupervised Style Modeling, Control and Transfer in End-to-End Speech Synthesis](https://arxiv.org/abs/1803.09017) and [Towards End-to-End Prosody Transfer for Expressive Speech Synthesis with Tacotron](https://arxiv.org/abs/1803.09047).
 
