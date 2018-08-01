@@ -1,4 +1,4 @@
-# Global Style Tokens w/ Tacotron and a WaveNet Vocoder 
+# Global Style Tokens w/ Tacotron 1 and a WaveNet Vocoder 
 
 Main structure of Tacotron w/ WaveNet forked from https://github.com/Rayhane-mamah.
 
